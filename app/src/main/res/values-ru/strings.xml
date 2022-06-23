@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MoviesFeed</string>
+    <string name="loading">Загрузка...</string>
+    <string name="date">Дата</string>
+    <string name="close">Закрыть</string>
+    <string name="movies_list">Список фильмов</string>
+    <string name="emphty_set">Пустой набор</string>
+    <string name="request_failed">Ошибка запроса</string>
+    <string name="no_movies_available">Нет доступных фильмов</string>
+</resources>
