@@ -83,7 +83,7 @@
             android:clickable="false"
             android:indeterminate="true"
             android:indeterminateDrawable="@drawable/progress_bar_drawable"
-            android:indeterminateDuration="3000" />
+            android:indeterminateDuration="1500" />
 
     </LinearLayout>
 
