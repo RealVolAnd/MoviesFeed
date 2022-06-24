@@ -7,4 +7,7 @@
     <string name="emphty_set">Emphty set</string>
     <string name="request_failed">Request failed</string>
     <string name="no_movies_available">No more movies available</string>
+    <string name="server_connection_error">Server connection error. Waiting…</string>
+    <string name="loading_please_wait">Loading, please wait…</string>
+    <string name="repeat_string">Close</string>
 </resources>

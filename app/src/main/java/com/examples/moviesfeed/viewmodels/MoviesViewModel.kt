@@ -8,8 +8,8 @@ import com.examples.moviesfeed.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-
-class HomeViewModel  @Inject constructor () :
+@HiltViewModel
+class MoviesViewModel @Inject constructor(val repository: MainRepository) :
     ViewModel(), LifecycleObserver {
     private var setOffset: Int = 0
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
@@ -33,7 +33,7 @@ class HomeViewModel  @Inject constructor () :
                 liveDataToObserve.postValue(AppState.Error(throwable))
             }
 
-            MainRepository.getMovies(
+            repository.getMovies(
                 setOffset,
                 onSuccess = ::onMoviesFetched,
                 onError = ::onError

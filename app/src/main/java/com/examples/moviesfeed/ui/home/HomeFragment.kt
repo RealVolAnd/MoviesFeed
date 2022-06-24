@@ -4,33 +4,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.examples.moviesfeed.App
 import com.examples.moviesfeed.R
 import com.examples.moviesfeed.databinding.HomeFragmentBinding
 import com.examples.moviesfeed.model.Movie
 import com.examples.moviesfeed.ui.home.adapters.MoviesAdapter
+import com.examples.moviesfeed.utils.MsgUtils
 import com.examples.moviesfeed.viewmodels.AppState
-import com.examples.moviesfeed.viewmodels.HomeViewModel
+import com.examples.moviesfeed.viewmodels.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
 
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: MoviesViewModel by viewModels()
     private var _vb: HomeFragmentBinding? = null
     private val vb get() = _vb!!
 
-    @Inject lateinit var moviesAdapter : MoviesAdapter
+    @Inject
+    lateinit var moviesAdapter: MoviesAdapter
+
+    @Inject
+    lateinit var msgUtils: MsgUtils
 
 
     private var fullMovieList: ArrayList<Movie> = ArrayList()
@@ -56,7 +57,7 @@ class HomeFragment : Fragment() {
                     }
                 }
             })
-           // moviesAdapter = MoviesAdapter()
+            // moviesAdapter = MoviesAdapter()
             moviesList.adapter = moviesAdapter
             moviesList.setItemViewCacheSize(20)
             return root
@@ -66,27 +67,33 @@ class HomeFragment : Fragment() {
     @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         viewModel.getLiveData().observe(viewLifecycleOwner) { renderData(it) }
         lifecycle.addObserver(viewModel)
-        viewModel.getMovieList(currentOffset)
+        checkFirstLoad()
+    }
+
+    private fun checkFirstLoad() {
+        if (App.firstList.isEmpty()) {
+            viewModel.getMovieList(currentOffset)
+        } else {
+            setData(App.firstList)
+        }
     }
 
     private fun renderData(appState: AppState) {
-        val loadingLayout: FrameLayout? = view?.findViewById(R.id.loadingLayout)
 
         when (appState) {
             is AppState.Success -> {
                 val movieData = appState.movieData
-                loadingLayout?.visibility = View.GONE
+                vb.loadingLayout.visibility = View.GONE
                 setData(movieData)
             }
             is AppState.Loading -> {
-                loadingLayout?.visibility = View.VISIBLE
+                vb.loadingLayout.visibility = View.VISIBLE
             }
             is AppState.Error -> {
-                loadingLayout?.visibility = View.GONE
-                Toast.makeText(context, R.string.no_movies_available, Toast.LENGTH_LONG).show()
+                vb.loadingLayout.visibility = View.GONE
+                msgUtils.showToast(getString(R.string.no_movies_available))
             }
         }
     }

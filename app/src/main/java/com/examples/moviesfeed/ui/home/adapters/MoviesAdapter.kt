@@ -13,18 +13,17 @@ import com.bumptech.glide.request.RequestOptions
 import com.examples.moviesfeed.R
 import com.examples.moviesfeed.model.Movie
 import com.examples.moviesfeed.utils.DESCRIPTION_CHARS_LIMIT
-import java.lang.NullPointerException
 import javax.inject.Inject
 
-class MoviesAdapter @Inject constructor(): RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>()  {
+class MoviesAdapter @Inject constructor() : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
 
-    private  var movies: ArrayList<Movie> = ArrayList()
+    private var movies: ArrayList<Movie> = ArrayList()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.movie_list_item_vertical, parent, false)
+            .inflate(R.layout.movie_list_item, parent, false)
         return MovieViewHolder(view)
     }
 
@@ -61,10 +60,10 @@ class MoviesAdapter @Inject constructor(): RecyclerView.Adapter<MoviesAdapter.Mo
 
             val overviewString: String = movie.overview
 
-            if (overviewString.length < DESCRIPTION_CHARS_LIMIT ) {
+            if (overviewString.length < DESCRIPTION_CHARS_LIMIT) {
                 overview.text = overviewString
             } else {
-                overview.text = overviewString.substring(0, DESCRIPTION_CHARS_LIMIT ) + "..."
+                overview.text = overviewString.substring(0, DESCRIPTION_CHARS_LIMIT) + "..."
             }
         }
     }

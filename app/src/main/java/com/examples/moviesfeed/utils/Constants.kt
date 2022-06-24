@@ -1,6 +1,12 @@
 package com.examples.moviesfeed.utils
 
-const val SPLASH_DISPLAY_LENGTH: Long = 1500
 const val API_BASE_URL = "https://api.nytimes.com/svc/movies/v2/"
-const val HTTP_AGENT = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:85.0) Gecko/20100101 Firefox/85.0"
 const val DESCRIPTION_CHARS_LIMIT = 250
+const val START_PAGE_OFSET = 0
+
+const val OFF = false
+const val ON = true
+
+val MESSAGE_TYPE_INFO = 1
+val MESSAGE_TYPE_ERROR = 2
+val MESSAGE_TYPE_WARN = 3

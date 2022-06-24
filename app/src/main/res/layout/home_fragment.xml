@@ -9,7 +9,7 @@
         android:id="@+id/movie_list_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#CDCDCD"
+        android:background="#E2E2E2"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
             android:clipToPadding="false"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            tools:listitem="@layout/movie_list_item_vertical" />
+            tools:listitem="@layout/movie_list_item" />
 
     </LinearLayout>
 

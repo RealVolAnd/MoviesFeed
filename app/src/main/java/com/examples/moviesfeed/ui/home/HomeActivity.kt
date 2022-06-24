@@ -1,7 +1,7 @@
 package com.examples.moviesfeed.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.examples.moviesfeed.R
 import com.examples.moviesfeed.databinding.ActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
