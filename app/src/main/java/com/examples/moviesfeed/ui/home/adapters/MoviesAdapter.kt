@@ -12,10 +12,13 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.examples.moviesfeed.R
 import com.examples.moviesfeed.model.Movie
+import com.examples.moviesfeed.utils.DESCRIPTION_CHARS_LIMIT
 import java.lang.NullPointerException
+import javax.inject.Inject
 
-class MoviesAdapter(private var movies: List<Movie>) :
-    RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
+class MoviesAdapter @Inject constructor(): RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>()  {
+
+    private  var movies: ArrayList<Movie> = ArrayList()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -31,7 +34,7 @@ class MoviesAdapter(private var movies: List<Movie>) :
         holder.bind(movies[position])
     }
 
-    fun updateMovies(movies: List<Movie>) {
+    fun updateMovies(movies: ArrayList<Movie>) {
         this.movies = movies
         notifyDataSetChanged()
     }
@@ -56,13 +59,12 @@ class MoviesAdapter(private var movies: List<Movie>) :
             }
             title.text = movie.title
 
-            val stringLimit = 250
             val overviewString: String = movie.overview
 
-            if (overviewString.length < stringLimit) {
+            if (overviewString.length < DESCRIPTION_CHARS_LIMIT ) {
                 overview.text = overviewString
             } else {
-                overview.text = overviewString.substring(0, stringLimit) + "..."
+                overview.text = overviewString.substring(0, DESCRIPTION_CHARS_LIMIT ) + "..."
             }
         }
     }

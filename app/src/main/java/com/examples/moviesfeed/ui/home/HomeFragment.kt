@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,14 +18,21 @@ import com.examples.moviesfeed.model.Movie
 import com.examples.moviesfeed.ui.home.adapters.MoviesAdapter
 import com.examples.moviesfeed.viewmodels.AppState
 import com.examples.moviesfeed.viewmodels.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-private lateinit var viewModel: HomeViewModel
 
+
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
+    private val viewModel: HomeViewModel by viewModels()
     private var _vb: HomeFragmentBinding? = null
     private val vb get() = _vb!!
-    private lateinit var moviesAdapter: MoviesAdapter
+
+    @Inject lateinit var moviesAdapter : MoviesAdapter
+
+
     private var fullMovieList: ArrayList<Movie> = ArrayList()
     private var currentOffset: Int = 0
 
@@ -47,16 +56,17 @@ class HomeFragment : Fragment() {
                     }
                 }
             })
-            moviesAdapter = MoviesAdapter(listOf())
+           // moviesAdapter = MoviesAdapter()
             moviesList.adapter = moviesAdapter
             moviesList.setItemViewCacheSize(20)
             return root
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        //viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         viewModel.getLiveData().observe(viewLifecycleOwner) { renderData(it) }
         lifecycle.addObserver(viewModel)
         viewModel.getMovieList(currentOffset)

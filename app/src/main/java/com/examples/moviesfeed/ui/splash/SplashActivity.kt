@@ -6,7 +6,7 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.examples.moviesfeed.ui.home.HomeActivity
 import com.examples.moviesfeed.utils.SPLASH_DISPLAY_LENGTH
-
+import dagger.hilt.android.AndroidEntryPoint
 
 class SplashActivity : AppCompatActivity() {
 
