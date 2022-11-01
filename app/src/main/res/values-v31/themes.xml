@@ -18,6 +18,6 @@
 
         <item name="android:windowSplashScreenBackground">@color/splash_background_color</item>
         <item name="android:windowSplashScreenAnimatedIcon">@android:color/transparent</item>
-        <item name="android:windowSplashScreenAnimationDuration">1</item>
+        <item name="android:windowSplashScreenAnimationDuration">0</item>
     </style>
 </resources>
